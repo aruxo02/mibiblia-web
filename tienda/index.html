@@ -1,0 +1,391 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Ficha para las tiendas — Mi Biblia</title>
+    <meta name="robots" content="noindex" />
+    <meta name="theme-color" content="#033B76" />
+    <link rel="icon" href="../img/icono-32.png" sizes="32x32" type="image/png" />
+    <link rel="stylesheet" href="../css/estilo.css" />
+    <style>
+      .campo { margin: 18px 0; }
+      .campo label { font-weight: 600; }
+      .cuenta { float: right; color: var(--muted); font-size: .9rem; font-variant-numeric: tabular-nums; }
+      .fila-copiar { display: flex; gap: 8px; margin-top: 6px; align-items: flex-start; }
+      .fila-copiar input, .fila-copiar textarea { flex: 1; min-width: 0; font: inherit; font-size: .97rem; color: var(--text);
+        background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 10px 12px; }
+      .fila-copiar textarea { resize: vertical; line-height: 1.5; }
+      .copiar { min-height: 44px; padding: 0 16px; border-radius: 12px; border: 0; background: var(--accent);
+        color: var(--on-accent); font: inherit; font-weight: 600; cursor: pointer; flex: 0 0 auto; }
+      .campo .nota { margin: 6px 0 0; }
+      .descargas { columns: 2 220px; padding-left: 1.2em; }
+      .nota { color: var(--muted); font-size: .95rem; }
+      .tabla th[scope=row] { width: 38%; font-weight: 600; background: var(--surface-alt); }
+      .tabla code { overflow-wrap: anywhere; }
+      @media (max-width: 560px) {
+        /* en el móvil, cada fila en dos líneas: la pregunta encima y la respuesta debajo */
+        .tabla th[scope=row], .tabla th[scope=row] + td { display: block; width: auto; }
+        .tabla th[scope=row] { border-bottom: 0; padding-bottom: 6px; }
+        .tabla th[scope=row] + td { padding-top: 8px; padding-bottom: 14px; }
+      }
+      .aviso { border-left: 4px solid var(--dorado); background: var(--surface); padding: 12px 16px; border-radius: 0 12px 12px 0; margin: 16px 0; }
+      .aviso p:last-child, .aviso ul:last-child { margin-bottom: 0; }
+      .vista { display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-end; margin: 12px 0 4px; }
+      .vista img { border-radius: 12px; border: 1px solid var(--border); }
+      .vista .icono-vista { width: 96px; height: 96px; border-radius: 22px; }
+      .vista .grafico-vista { width: min(100%, 420px); }
+      #copiado { position: fixed; left: 50%; bottom: 20px; transform: translateX(-50%); background: var(--text); color: var(--bg);
+        padding: 10px 18px; border-radius: 999px; opacity: 0; transition: opacity .2s; pointer-events: none; }
+      #copiado.visible { opacity: 1; }
+    </style>
+  </head>
+  <body>
+    <a class="saltar" href="#contenido">Saltar al contenido</a>
+    <header class="cabecera marino">
+      <div class="contenedor">
+        <a class="marca" href="../"><img src="../img/icono-192.png" alt="" width="36" height="36" />Mi Biblia</a>
+        <nav class="menu" aria-label="Principal">
+          <a href="../">Inicio</a><a href="../ayuda.html">Ayuda</a><a href="../privacidad.html">Privacidad</a>
+        </nav>
+      </div>
+    </header>
+    <main id="contenido" class="pagina">
+      <div class="contenedor texto">
+        <h1>Ficha para las tiendas</h1>
+        <p>Todo lo que piden Google Play Console y App Store Connect para Mi Biblia, listo para copiar. Junto a cada texto va su número de caracteres y el máximo de la tienda (los cuenta <code>scripts/contar.mjs</code>).</p>
+        <nav aria-label="En esta página"><ul>
+          <li><a href="#enlaces">Enlaces y datos</a></li>
+          <li><a href="#google">Google Play</a></li>
+          <li><a href="#apple">App Store</a></li>
+          <li><a href="#suscripciones">Suscripciones de apoyo</a></li>
+          <li><a href="#antes">Antes de subir la app</a></li>
+        </ul></nav>
+
+        <h2 id="enlaces">Enlaces y datos</h2>
+        <div class="campo">
+          <label for="url-privacidad">Política de privacidad</label>
+          <div class="fila-copiar"><input id="url-privacidad" type="text" readonly value="https://aruxo02.github.io/mibiblia-web/privacidad.html"><button type="button" class="copiar" data-para="url-privacidad">Copiar</button></div>
+        </div>
+        <div class="campo">
+          <label for="url-ayuda">Asistencia / ayuda</label>
+          <div class="fila-copiar"><input id="url-ayuda" type="text" readonly value="https://aruxo02.github.io/mibiblia-web/ayuda.html"><button type="button" class="copiar" data-para="url-ayuda">Copiar</button></div>
+        </div>
+        <div class="campo">
+          <label for="url-web">Sitio web (marketing)</label>
+          <div class="fila-copiar"><input id="url-web" type="text" readonly value="https://aruxo02.github.io/mibiblia-web/"><button type="button" class="copiar" data-para="url-web">Copiar</button></div>
+        </div>
+        <div class="campo">
+          <label for="correo">Correo de contacto</label>
+          <div class="fila-copiar"><input id="correo" type="text" readonly value="moilopote@gmail.com"><button type="button" class="copiar" data-para="correo">Copiar</button></div>
+        </div>
+        <div class="campo">
+          <label for="desarrollador">Desarrollador</label>
+          <div class="fila-copiar"><input id="desarrollador" type="text" readonly value="López Otero"><button type="button" class="copiar" data-para="desarrollador">Copiar</button></div>
+        </div>
+        <div class="campo">
+          <label for="paquete">Paquete (Android) e identificador (iOS)</label>
+          <div class="fila-copiar"><input id="paquete" type="text" readonly value="com.lopezotero.mibiblia"><button type="button" class="copiar" data-para="paquete">Copiar</button></div>
+        </div>
+
+        <h2 id="google">Google Play</h2>
+        <h3>Ficha principal</h3>
+        <div class="campo" data-limite="30">
+          <label for="gp-nombre">Nombre de la app</label><span class="cuenta">9 / 30</span>
+          <div class="fila-copiar"><input id="gp-nombre" type="text" readonly value="Mi Biblia"><button type="button" class="copiar" data-para="gp-nombre">Copiar</button></div>
+        </div>
+        <div class="campo" data-limite="80">
+          <label for="gp-breve">Descripción breve</label><span class="cuenta">80 / 80</span>
+          <div class="fila-copiar"><input id="gp-breve" type="text" readonly value="La Biblia de Jerusalén con sus notas, la Liturgia de las Horas y la Misa del día"><button type="button" class="copiar" data-para="gp-breve">Copiar</button></div>
+        </div>
+        <div class="campo" data-limite="4000">
+          <label for="gp-larga">Descripción completa</label><span class="cuenta">3000 / 4000</span>
+          <div class="fila-copiar"><textarea id="gp-larga" readonly rows="16">Mi Biblia reúne en una sola aplicación la Biblia de Jerusalén, con todas sus notas e introducciones, la oración de la Iglesia y las lecturas de cada día. Para leer, rezar y conocer mejor la Palabra.
+
+LA BIBLIA
+• Los 73 libros de la Biblia de Jerusalén, con las notas a pie de página y la introducción a cada libro.
+• Las referencias paralelas, para quien las quiera ver: se encienden en Ajustes.
+• Lector cómodo: texto corrido o versículo a versículo, con la letra y el tamaño que prefieras.
+• Marca versículos con colores, escribe tus notas y une pasajes con tus propios paralelos.
+• Búsqueda en todo el texto, sin preocuparte de las tildes.
+• Planes de lectura, historial y «Estudiar la Biblia», libro a libro.
+• Evangelio y lectura al azar, con aviso diario si quieres.
+
+LITURGIA
+• Liturgia de las Horas completa: Oficio de lectura, Laudes, Hora intermedia, Vísperas y Completas, según el calendario de tu país.
+• Lecturas de la Misa de cada día, con el salmo y el Evangelio.
+• Si quieres, el latín junto al español en los salmos, los cánticos y las oraciones fijas.
+• Calendario litúrgico, año litúrgico, santoral y santos patronos.
+• Vigilias de Pascua, Pentecostés y Navidad, por partes.
+• Preparar Eucaristía: las lecturas del día, quién las lee y una nota.
+• ¿Cuándo se lee en Misa? Escribe una cita y mira los próximos días en que se proclama.
+
+ORACIÓN
+• Santo Rosario guiado, con los misterios del día.
+• Devocionario por categorías, Vía Crucis, novenas, Ángelus / Regina Coeli y examen de conciencia.
+• Lectio divina con el Evangelio del día, paso a paso, con una campana para el silencio.
+• Oración por los difuntos, con aviso en su aniversario.
+• Recuerda el santo: apunta nombres y la app te avisa el día de su santo.
+• Una oración para cada día.
+
+ESTUDIO
+• Escrutar la Palabra: recorre la Escritura de cita en cita y guarda tu registro.
+• Vocabulario de Teología Bíblica.
+• Compara evangelios: la misma escena en dos evangelios a la vez, en pantalla dividida, y la sinopsis de los evangelios en columnas.
+• Mapas, cronología, árbol de dinastías, calendario judío y pesos y medidas.
+• Personajes de la Biblia y el juego «¿Quién es quién?».
+• Diario espiritual con tus resonancias.
+
+Y ADEMÁS
+• Escucha la Biblia y la liturgia en voz alta.
+• Widget con el versículo del día.
+• Noticias de Vatican News.
+• Pantalla de inicio a tu gusto y siete estilos de color, con modo oscuro.
+
+PARA TODOS
+• Pensada para TalkBack: con el lector de pantalla, la Biblia se lee versículo a versículo, con acciones para marcar, ver las notas o escuchar.
+• Alto contraste, letra grande, una letra para dislexia y opción de quitar las animaciones.
+
+TUYA
+• Gratis, sin anuncios, sin registro y sin recoger ningún dato. Todo se guarda en tu móvil.
+• Si te ayuda, puedes apoyar su mantenimiento con una suscripción opcional de 1, 2 o 3 € al mes. Quien apoya deja de ver el aviso que invita a compartir la app; todo lo demás es igual para todos.
+• Funciona sin conexión; internet solo hace falta para las noticias.</textarea><button type="button" class="copiar" data-para="gp-larga">Copiar</button></div>
+        </div>
+        <div class="campo" data-limite="500">
+          <label for="gp-novedades">Notas de la versión 1.0.0 (Novedades)</label><span class="cuenta">197 / 500</span>
+          <div class="fila-copiar"><textarea id="gp-novedades" readonly rows="4">Primera versión de Mi Biblia: la Biblia de Jerusalén con todas sus notas, la Liturgia de las Horas, las lecturas de la Misa de cada día, el Rosario y mucho más. Gratis, sin anuncios y sin registro.</textarea><button type="button" class="copiar" data-para="gp-novedades">Copiar</button></div>
+        </div>
+        <div class="envoltura-tabla" tabindex="0" role="region" aria-label="Google Play: categoría e imágenes"><table class="tabla"><tbody><tr><th scope="row">Tipo y categoría</th><td>Aplicación · Libros y obras de consulta</td></tr><tr><th scope="row">Icono</th><td><a href="google-play/icono-512.png" download>icono-512.png</a> (512 × 512, PNG de 32 bits, opaco: a sangre y sin transparencia; Google le pone la máscara)</td></tr><tr><th scope="row">Gráfico destacado</th><td><a href="google-play/grafico-destacado-1024x500.png" download>grafico-destacado-1024x500.png</a> (1024 × 500). El icono, el nombre y la frase van en el centro, porque Google lo recorta en algunos sitios.</td></tr></tbody></table></div>
+        <div class="vista">
+          <img class="icono-vista" src="google-play/icono-512.png" width="96" height="96" alt="Icono de Mi Biblia: una Biblia abierta con cantos dorados, una cruz dorada luminosa y la cinta roja, sobre azul marino." loading="lazy" />
+          <img class="grafico-vista" src="google-play/grafico-destacado-1024x500.png" width="1024" height="500" alt="Gráfico destacado: el icono, «Mi Biblia», «La Biblia de Jerusalén y la liturgia de cada día» y «Sin anuncios · Sin registro», sobre azul marino." loading="lazy" />
+        </div>
+        <h3>Capturas del teléfono (1080 × 1920)</h3><p class="nota">Las ocho que admite Google, en orden: la primera es la que más se ve. Son 9:16, lo que pide Google para poder destacar la app; 1080 × 2400 no valdría (solo admite 16:9 o 9:16). Las de tablet son opcionales y no van.</p><ul class="descargas"><li><a href="google-play/capturas/01-inicio.png" download>01-inicio.png</a></li><li><a href="google-play/capturas/02-biblia.png" download>02-biblia.png</a></li><li><a href="google-play/capturas/03-versiculo.png" download>03-versiculo.png</a></li><li><a href="google-play/capturas/04-laudes.png" download>04-laudes.png</a></li><li><a href="google-play/capturas/05-lecturas.png" download>05-lecturas.png</a></li><li><a href="google-play/capturas/06-rosario.png" download>06-rosario.png</a></li><li><a href="google-play/capturas/07-comparar.png" download>07-comparar.png</a></li><li><a href="google-play/capturas/08-mapa.png" download>08-mapa.png</a></li></ul>
+
+        <h3>Contenido de la aplicación</h3>
+        <div class="envoltura-tabla" tabindex="0" role="region" aria-label="Google Play: contenido de la aplicación"><table class="tabla"><tbody><tr><th scope="row">Política de privacidad</th><td>La dirección de arriba.</td></tr><tr><th scope="row">Acceso a la aplicación</th><td>Toda la funcionalidad está disponible sin restricciones: no hay inicio de sesión ni cuentas.</td></tr><tr><th scope="row">Anuncios</th><td>No, la app no contiene anuncios.</td></tr><tr><th scope="row">Clasificación de contenido</th><td>Categoría «Referencia, noticias o educación». «No» a violencia, sexo, lenguaje malsonante, drogas, alcohol y tabaco, humor grosero, apuestas, interacción entre usuarios y compartir la ubicación. «Sí» a compras digitales: las suscripciones de apoyo (sale como «Compras en la aplicación» y no cambia la edad). Resultado esperado: PEGI 3 / Para todos.</td></tr><tr><th scope="row">Público objetivo</th><td>13 años o más (13-15, 16-17 y 18 o más). ¿Puede atraer a niños? No. Si se incluyeran menores de 13, Google aplica el programa de Familias, con más requisitos.</td></tr><tr><th scope="row">¿Es una app de noticias?</th><td>No: tiene una sección con las noticias de Vatican News, pero no es su función principal.</td></tr><tr><th scope="row">Seguridad de los datos</th><td>¿Recoge o comparte la app alguno de los tipos de datos de usuario obligatorios? <strong>No.</strong> Resultado: «No se recogen datos» y «No se comparten datos con terceros». Las marcas, notas, diario y ajustes se guardan solo en el móvil (Google no cuenta como «recogido» lo que no sale del dispositivo). El pago de las suscripciones lo procesa Google Play; la app solo pregunta desde el móvil si hay una activa. Las noticias se descargan sin enviar ningún dato.</td></tr><tr><th scope="row">Aplicaciones de salud</th><td>La app no tiene funciones de salud: en la declaración, marca que no tiene ninguna.</td></tr><tr><th scope="row">Apps gubernamentales y funciones financieras</th><td>No / Ninguna.</td></tr><tr><th scope="row">ID de publicidad</th><td>No: la app no usa el ID de publicidad.</td></tr><tr><th scope="row">Servicio en primer plano</th><td><strong>Uso especial</strong> (<code>FOREGROUND_SERVICE_SPECIAL_USE</code>), para la campana del silencio de la Lectio divina. Los textos, abajo.</td></tr><tr><th scope="row">Alarmas exactas</th><td>No hay que declarar nada: la app pide <code>SCHEDULE_EXACT_ALARM</code> («Alarmas y recordatorios»), que concede el propio usuario en los ajustes del sistema, y no <code>USE_EXACT_ALARM</code>, que es el permiso restringido y el único con declaración. Si Play Console preguntara, el uso es que la campana del final del silencio de la Lectio, que empieza el usuario, suene a su hora con la pantalla apagada.</td></tr><tr><th scope="row">Otros permisos especiales</th><td>Ninguno: no usa ubicación, SMS, llamadas, micrófono, cámara ni acceso a todos los archivos.</td></tr></tbody></table></div>
+
+        <h3 id="servicio">Servicio en primer plano: la campana del silencio</h3>
+        <p>Contenido de la app → Permisos de servicios en primer plano. Tipo: <strong>Uso especial</strong>; caso de uso: escribir el propio (no hay uno de la lista para temporizadores). Google lo revisa a mano y pide los textos en inglés:</p>
+        <div class="campo">
+          <label for="fgs-desc">Descripción del uso</label>
+          <div class="fila-copiar"><textarea id="fgs-desc" readonly rows="5">Prayer silence timer. During Lectio Divina the user chooses a silence of 5, 10, 15 or 30 minutes; a bell rings at the end. When the user hasn't granted "Alarms &amp; reminders", a foreground service runs only during that silence, with an ongoing notification that shows the time left and a Stop button, and stops itself when the bell rings. With the permission, an alarm clock is used instead and no service runs.</textarea><button type="button" class="copiar" data-para="fgs-desc">Copiar</button></div>
+        </div>
+        <div class="campo">
+          <label for="fgs-impacto">Qué pasa si se retrasa o se interrumpe</label>
+          <div class="fila-copiar"><textarea id="fgs-impacto" readonly rows="3">The bell would ring late or not at all with the screen off (Doze defers inexact alarms by many minutes), so the user, praying with the screen off, wouldn't know the silence has ended.</textarea><button type="button" class="copiar" data-para="fgs-impacto">Copiar</button></div>
+        </div>
+        <p><strong>Vídeo</strong> (subirlo a YouTube sin listar o a Drive): en un Android 14 sin «Alarmas y recordatorios» (Ajustes → Apps → Mi Biblia → Alarmas y recordatorios, desactivado), abrir Utilidades → Lectio, llegar al silencio, tocar «5», apagar la pantalla, enseñar en la pantalla de bloqueo el aviso «Silencio · quedan N min» con «Parar», esperar a la campana y enseñar que el aviso fijo desaparece y queda «Fin del silencio».</p>
+        <p class="nota">Si Google lo rechazara, se quita el servicio de <code>modules/android-extras/android/src/main/AndroidManifest.xml</code> en la app: la campana queda con la alarma normal y la pantalla del silencio ofrece «Permitir alarmas» (<code>docs/PUBLICAR.md</code>).</p>
+
+        <h2 id="apple">App Store</h2>
+        <h3>Nombre</h3>
+        <p>El nombre de la App Store tiene que ser único y «Mi Biblia» puede estar cogido. Si lo está, elige una de las alternativas. El nombre que se ve debajo del icono en el iPhone sigue siendo «Mi Biblia» (lo pone la app, no la ficha).</p>
+        <div class="campo" data-limite="30">
+          <label for="as-nombre">Nombre (si está libre)</label><span class="cuenta">9 / 30</span>
+          <div class="fila-copiar"><input id="as-nombre" type="text" readonly value="Mi Biblia"><button type="button" class="copiar" data-para="as-nombre">Copiar</button></div>
+        </div>
+        <div class="campo" data-limite="30">
+          <label for="as-nombre-1">Alternativa 1</label><span class="cuenta">29 / 30</span>
+          <div class="fila-copiar"><input id="as-nombre-1" type="text" readonly value="Mi Biblia: Palabra y Liturgia"><button type="button" class="copiar" data-para="as-nombre-1">Copiar</button></div>
+          <p class="nota">Dice lo que hay dentro: la Escritura y la oración de la Iglesia.</p>
+        </div>
+        <div class="campo" data-limite="30">
+          <label for="as-nombre-2">Alternativa 2</label><span class="cuenta">18 / 30</span>
+          <div class="fila-copiar"><input id="as-nombre-2" type="text" readonly value="Mi Biblia católica"><button type="button" class="copiar" data-para="as-nombre-2">Copiar</button></div>
+          <p class="nota">Corta y con la palabra que más se busca. «Mi Biblia: Jerusalén y Liturgia» no cabe: tiene 31.</p>
+        </div>
+        <h3>Información de la app</h3>
+        <div class="campo" data-limite="30">
+          <label for="as-subtitulo">Subtítulo</label><span class="cuenta">29 / 30</span>
+          <div class="fila-copiar"><input id="as-subtitulo" type="text" readonly value="Biblia de Jerusalén con notas"><button type="button" class="copiar" data-para="as-subtitulo">Copiar</button></div>
+        </div>
+        <div class="campo" data-limite="170">
+          <label for="as-promo">Texto promocional</label><span class="cuenta">153 / 170</span>
+          <div class="fila-copiar"><textarea id="as-promo" readonly rows="3">Lee la Biblia de Jerusalén con sus notas, reza la Liturgia de las Horas y sigue las lecturas de la Misa de cada día. Gratis, sin anuncios y sin registro.</textarea><button type="button" class="copiar" data-para="as-promo">Copiar</button></div>
+        </div>
+        <div class="campo" data-limite="4000">
+          <label for="as-desc">Descripción</label><span class="cuenta">3139 / 4000</span>
+          <div class="fila-copiar"><textarea id="as-desc" readonly rows="16">Mi Biblia reúne en una sola aplicación la Biblia de Jerusalén, con todas sus notas e introducciones, la oración de la Iglesia y las lecturas de cada día. Para leer, rezar y conocer mejor la Palabra.
+
+LA BIBLIA
+• Los 73 libros de la Biblia de Jerusalén, con las notas a pie de página y la introducción a cada libro.
+• Las referencias paralelas, para quien las quiera ver: se encienden en Ajustes.
+• Lector cómodo: texto corrido o versículo a versículo, con la letra y el tamaño que prefieras.
+• Marca versículos con colores, escribe tus notas y une pasajes con tus propios paralelos.
+• Búsqueda en todo el texto, sin preocuparte de las tildes.
+• Planes de lectura, historial y «Estudiar la Biblia», libro a libro.
+• Evangelio y lectura al azar, con aviso diario si quieres.
+
+LITURGIA
+• Liturgia de las Horas completa: Oficio de lectura, Laudes, Hora intermedia, Vísperas y Completas, según el calendario de tu país.
+• Lecturas de la Misa de cada día, con el salmo y el Evangelio.
+• Si quieres, el latín junto al español en los salmos, los cánticos y las oraciones fijas.
+• Calendario litúrgico, año litúrgico, santoral y santos patronos.
+• Vigilias de Pascua, Pentecostés y Navidad, por partes.
+• Preparar Eucaristía: las lecturas del día, quién las lee y una nota.
+• ¿Cuándo se lee en Misa? Escribe una cita y mira los próximos días en que se proclama.
+
+ORACIÓN
+• Santo Rosario guiado, con los misterios del día.
+• Devocionario por categorías, Vía Crucis, novenas, Ángelus / Regina Coeli y examen de conciencia.
+• Lectio divina con el Evangelio del día, paso a paso, con una campana para el silencio.
+• Oración por los difuntos, con aviso en su aniversario.
+• Recuerda el santo: apunta nombres y la app te avisa el día de su santo.
+• Una oración para cada día.
+
+ESTUDIO
+• Escrutar la Palabra: recorre la Escritura de cita en cita y guarda tu registro.
+• Vocabulario de Teología Bíblica.
+• Compara evangelios: la misma escena en dos evangelios a la vez, en pantalla dividida, y la sinopsis de los evangelios en columnas.
+• Mapas, cronología, árbol de dinastías, calendario judío y pesos y medidas.
+• Personajes de la Biblia y el juego «¿Quién es quién?».
+• Diario espiritual con tus resonancias.
+
+Y ADEMÁS
+• Escucha la Biblia y la liturgia en voz alta.
+• Noticias de Vatican News.
+• Pantalla de inicio a tu gusto y siete estilos de color, con modo oscuro.
+
+PARA TODOS
+• Pensada para VoiceOver: con el lector de pantalla, la Biblia se lee versículo a versículo, con acciones para marcar, ver las notas o escuchar.
+• Alto contraste, letra grande, una letra para dislexia y opción de quitar las animaciones.
+
+TUYA
+• Gratis, sin anuncios, sin registro y sin recoger ningún dato. Todo se guarda en tu móvil.
+• Si te ayuda, puedes apoyar su mantenimiento con una suscripción opcional de 1, 2 o 3 € al mes. Quien apoya deja de ver el aviso que invita a compartir la app; todo lo demás es igual para todos.
+• Funciona sin conexión; internet solo hace falta para las noticias.
+
+Condiciones de uso (EULA): https://www.apple.com/legal/internet-services/itunes/dev/stdeula/
+Política de privacidad: https://aruxo02.github.io/mibiblia-web/privacidad.html</textarea><button type="button" class="copiar" data-para="as-desc">Copiar</button></div>
+          <p class="nota">Sin «Android», «Google» ni «TalkBack»: Apple rechaza la ficha que nombra otras plataformas (norma 2.3.10). Lleva al final la EULA y la política de privacidad, que Apple pide en las apps con suscripciones.</p>
+        </div>
+        <div class="campo" data-limite="100">
+          <label for="as-claves">Palabras clave (separadas por comas, sin espacios)</label><span class="cuenta">99 / 100</span>
+          <div class="fila-copiar"><input id="as-claves" type="text" readonly value="horas,laudes,visperas,completas,breviario,evangelio,lecturas,misa,rosario,santoral,oracion,catolica"><button type="button" class="copiar" data-para="as-claves">Copiar</button></div>
+          <p class="nota">No repiten las del nombre ni las del subtítulo, que Apple ya tiene en cuenta.</p>
+        </div>
+        <div class="campo" data-limite="4000">
+          <label for="as-novedades">Novedades de la versión 1.0.0</label><span class="cuenta">197 / 4000</span>
+          <div class="fila-copiar"><textarea id="as-novedades" readonly rows="4">Primera versión de Mi Biblia: la Biblia de Jerusalén con todas sus notas, la Liturgia de las Horas, las lecturas de la Misa de cada día, el Rosario y mucho más. Gratis, sin anuncios y sin registro.</textarea><button type="button" class="copiar" data-para="as-novedades">Copiar</button></div>
+          <p class="nota">En la primera versión App Store Connect no pide este campo; queda para la siguiente o para TestFlight («Qué probar»).</p>
+        </div>
+        <div class="campo">
+          <label for="as-copyright">Copyright (campo obligatorio de Apple)</label>
+          <div class="fila-copiar"><input id="as-copyright" type="text" readonly value="2026 López Otero"><button type="button" class="copiar" data-para="as-copyright">Copiar</button></div>
+        </div>
+        <div class="envoltura-tabla" tabindex="0" role="region" aria-label="App Store: categorías y cuestionarios"><table class="tabla"><tbody><tr><th scope="row">Categoría principal</th><td>Referencia</td></tr><tr><th scope="row">Categoría secundaria</th><td>Libros</td></tr><tr><th scope="row">Privacidad de la app</th><td>«No se recopilan datos» (Data Not Collected). Rastreo: no. Las compras las procesa Apple y la app no envía nada a ningún servidor.</td></tr><tr><th scope="row">Clasificación por edades</th><td>Responde «Ninguno» / «No» a todo el cuestionario: sin violencia, sexo, lenguaje, drogas, juego, contenido generado por usuarios, chat ni anuncios. El navegador de la app solo abre los enlaces de las noticias y los textos del Papa: «Acceso web sin restricciones», no. Resultado esperado: 4+.</td></tr><tr><th scope="row">Cifrado (exportación)</th><td>Solo usa el HTTPS del sistema: exento. La app ya lo declara (<code>usesNonExemptEncryption: false</code> en <code>app.config.ts</code>, que pone ITSAppUsesNonExemptEncryption = NO), así que App Store Connect no lo preguntará en cada versión.</td></tr><tr><th scope="row">Información para la revisión</th><td>No hace falta cuenta de prueba: no hay inicio de sesión. La nota, abajo, en «Suscripciones de apoyo».</td></tr></tbody></table></div>
+        <h3>Capturas de iPhone 6,9″ (1320 × 2868)</h3><p class="nota">El tamaño de los iPhone Pro Max de 6,9″; App Store Connect lo admite para esa casilla y las reduce para los iPhone más pequeños.</p><ul class="descargas"><li><a href="app-store/iphone-6.9/01-inicio.png" download>01-inicio.png</a></li><li><a href="app-store/iphone-6.9/02-biblia.png" download>02-biblia.png</a></li><li><a href="app-store/iphone-6.9/03-versiculo.png" download>03-versiculo.png</a></li><li><a href="app-store/iphone-6.9/04-laudes.png" download>04-laudes.png</a></li><li><a href="app-store/iphone-6.9/05-lecturas.png" download>05-lecturas.png</a></li><li><a href="app-store/iphone-6.9/06-rosario.png" download>06-rosario.png</a></li><li><a href="app-store/iphone-6.9/07-comparar.png" download>07-comparar.png</a></li><li><a href="app-store/iphone-6.9/08-mapa.png" download>08-mapa.png</a></li><li><a href="app-store/iphone-6.9/09-utilidades.png" download>09-utilidades.png</a></li></ul>
+        <h3>Capturas de iPad 13″ (2064 × 2752)</h3><p class="nota">Obligatorias porque la app admite iPad. Si prefieres no publicarla para iPad, se puede desactivar y en el iPad se abrirá en modo iPhone; entonces no hacen falta.</p><ul class="descargas"><li><a href="app-store/ipad-13/01-inicio.png" download>01-inicio.png</a></li><li><a href="app-store/ipad-13/02-biblia.png" download>02-biblia.png</a></li><li><a href="app-store/ipad-13/03-versiculo.png" download>03-versiculo.png</a></li><li><a href="app-store/ipad-13/04-laudes.png" download>04-laudes.png</a></li><li><a href="app-store/ipad-13/05-lecturas.png" download>05-lecturas.png</a></li><li><a href="app-store/ipad-13/06-rosario.png" download>06-rosario.png</a></li><li><a href="app-store/ipad-13/07-comparar.png" download>07-comparar.png</a></li><li><a href="app-store/ipad-13/08-mapa.png" download>08-mapa.png</a></li><li><a href="app-store/ipad-13/09-utilidades.png" download>09-utilidades.png</a></li></ul>
+
+        <h2 id="suscripciones">Suscripciones de apoyo</h2>
+        <p>La app ofrece tres suscripciones mensuales de apoyo en <em>Ajustes → Apoya el mantenimiento</em>. Hay que crearlas en cada tienda con <strong>exactamente estos identificadores</strong>; si no coinciden, la app no las encuentra. Con cualquiera de ellas deja de salir en Inicio el aviso que invita a compartir la app.</p>
+        <h3>1. Apoyo mensual básico</h3>
+        <div class="campo">
+          <label for="sku-1">Identificador del producto (igual en las dos tiendas)</label>
+          <div class="fila-copiar"><input id="sku-1" type="text" readonly value="apoyo_mensual_1"><button type="button" class="copiar" data-para="sku-1">Copiar</button></div>
+        </div>
+        <div class="campo" data-limite="30">
+          <label for="nombre-1">Nombre visible</label><span class="cuenta">20 / 30</span>
+          <div class="fila-copiar"><input id="nombre-1" type="text" readonly value="Apoyo mensual básico"><button type="button" class="copiar" data-para="nombre-1">Copiar</button></div>
+        </div>
+        <div class="campo" data-limite="45">
+          <label for="desc-1">Descripción</label><span class="cuenta">26 / 45</span>
+          <div class="fila-copiar"><input id="desc-1" type="text" readonly value="Una ayuda pequeña que suma"><button type="button" class="copiar" data-para="desc-1">Copiar</button></div>
+        </div>
+        <p class="nota">Precio: 1,00 € al mes en Google Play · 0,99 € (o el precio más cercano a 1 €) en la App Store.</p>
+        <h3>2. Apoyo mensual</h3>
+        <div class="campo">
+          <label for="sku-2">Identificador del producto (igual en las dos tiendas)</label>
+          <div class="fila-copiar"><input id="sku-2" type="text" readonly value="apoyo_mensual_2"><button type="button" class="copiar" data-para="sku-2">Copiar</button></div>
+        </div>
+        <div class="campo" data-limite="30">
+          <label for="nombre-2">Nombre visible</label><span class="cuenta">13 / 30</span>
+          <div class="fila-copiar"><input id="nombre-2" type="text" readonly value="Apoyo mensual"><button type="button" class="copiar" data-para="nombre-2">Copiar</button></div>
+        </div>
+        <div class="campo" data-limite="45">
+          <label for="desc-2">Descripción</label><span class="cuenta">23 / 45</span>
+          <div class="fila-copiar"><input id="desc-2" type="text" readonly value="Para seguir mejorándola"><button type="button" class="copiar" data-para="desc-2">Copiar</button></div>
+        </div>
+        <p class="nota">Precio: 2,00 € al mes en Google Play · 1,99 € (o el más cercano a 2 €) en la App Store.</p>
+        <h3>3. Apoyo mensual generoso</h3>
+        <div class="campo">
+          <label for="sku-3">Identificador del producto (igual en las dos tiendas)</label>
+          <div class="fila-copiar"><input id="sku-3" type="text" readonly value="apoyo_mensual_3"><button type="button" class="copiar" data-para="sku-3">Copiar</button></div>
+        </div>
+        <div class="campo" data-limite="30">
+          <label for="nombre-3">Nombre visible</label><span class="cuenta">22 / 30</span>
+          <div class="fila-copiar"><input id="nombre-3" type="text" readonly value="Apoyo mensual generoso"><button type="button" class="copiar" data-para="nombre-3">Copiar</button></div>
+        </div>
+        <div class="campo" data-limite="45">
+          <label for="desc-3">Descripción</label><span class="cuenta">27 / 45</span>
+          <div class="fila-copiar"><input id="desc-3" type="text" readonly value="Para que llegue a más gente"><button type="button" class="copiar" data-para="desc-3">Copiar</button></div>
+        </div>
+        <p class="nota">Precio: 3,00 € al mes en Google Play · 2,99 € (o el más cercano a 3 €) en la App Store.</p>
+
+        <h3>Google Play Console</h3>
+        <ol>
+          <li>Configura el <strong>perfil de pagos</strong> (Configuración → Perfil de pagos) si aún no lo tienes: sin él no se puede cobrar.</li>
+          <li>Sube antes una versión de la app a una pista de prueba: Google no deja crear productos hasta que la app tiene el permiso de facturación.</li>
+          <li>Monetizar → Productos → <strong>Suscripciones</strong> → Crear suscripción, una por cada identificador de arriba.</li>
+          <li>En cada una, añade un <strong>plan base</strong>: renovación automática, periodo de facturación <strong>mensual</strong>, el precio en euros (Google calcula el de otros países) y actívalo. No añadas ofertas ni pruebas gratuitas.</li>
+          <li>Para probarlo sin pagar: Configuración → Pruebas de licencia → añade tu correo de Google.</li>
+        </ol>
+
+        <h3>App Store Connect</h3>
+        <ol>
+          <li>Firma el acuerdo de <strong>Apps de pago</strong> (Acuerdos, impuestos y banca), con los datos bancarios y fiscales. Sin él, las compras no funcionan.</li>
+          <li>Tu app → Monetización → <strong>Suscripciones</strong> → crea un grupo llamado <strong>Apoyo</strong>.</li>
+          <li>Dentro del grupo, crea las tres suscripciones con los identificadores de arriba: duración <strong>1 mes</strong>, el precio, y en Localización (español) el nombre visible y la descripción.</li>
+          <li>Ordena los niveles con el de 3 € arriba, para que el cambio de cantidad funcione bien.</li>
+          <li>Cada suscripción pide una <strong>captura de la pantalla de compra</strong> para la revisión: hazla en el iPhone (TestFlight), en Ajustes → Apoya el mantenimiento.</li>
+          <li>La primera vez, las suscripciones se envían a revisión junto con la versión de la app.</li>
+        </ol>
+        <div class="aviso"><p><strong>La norma 3.1.2 de Apple</strong> pide que una suscripción dé algo a cambio de forma continuada. La de Mi Biblia lo da: mientras está activa, Inicio no enseña el aviso fijo para compartir la app, que sale los dos primeros días de uso de cada semana y no se puede cerrar. Adjunta a la revisión una captura de Inicio con el aviso y otra de la pantalla de apoyo, hechas en el iPhone. Si aun así Apple las rechazara, la alternativa que admite son «propinas»: tres compras únicas de 1, 2 y 3 €, y habría que cambiar la app para ofrecerlas así.</p></div>
+        <div class="campo">
+          <label for="nota-revision">Nota para la revisión de Apple (en inglés, para el revisor)</label>
+          <div class="fila-copiar"><textarea id="nota-revision" readonly rows="10">Mi Biblia is a Catholic Bible app: the Jerusalem Bible (Spanish) with its notes, the Liturgy of the Hours and the daily Mass readings. All the content is inside the app and works offline; only the News screen uses the internet (the public Vatican News RSS feed). There is no login, so no demo account is needed. The three auto-renewable subscriptions of the "Apoyo" group (Settings → "Apoya el mantenimiento") are an optional sponsorship of the app's upkeep (updates, fixes and new texts), and they give the subscriber something in return: while a subscription is active, the Home screen no longer shows the fixed banner that invites the user to share the app ("¿Quieres colaborar con esta app y no puedes hacerlo económicamente? Compártela…"), which otherwise appears on the first two days of use of every week and cannot be dismissed. The support screen says so. It also shows the price and period of each subscription, the auto-renewal terms, Restore Purchases, Manage or cancel the subscription, and links to the privacy policy and to the standard Apple EULA. Attached: a screenshot of Home with the banner and one of the support screen.</textarea><button type="button" class="copiar" data-para="nota-revision">Copiar</button></div>
+        </div>
+        <div class="campo">
+          <label for="nota-revision-es">La misma nota en español</label>
+          <div class="fila-copiar"><textarea id="nota-revision-es" readonly rows="10">Mi Biblia es una app católica: la Biblia de Jerusalén con sus notas, la Liturgia de las Horas y las lecturas de la Misa de cada día. Todo el contenido va dentro de la app y funciona sin conexión; solo la pantalla de Noticias usa internet (el canal RSS público de Vatican News). No hay inicio de sesión, así que no hace falta cuenta de prueba. Las tres suscripciones con renovación automática del grupo «Apoyo» (Ajustes → «Apoya el mantenimiento») son un patrocinio voluntario del mantenimiento de la app (actualizaciones, correcciones y textos nuevos) y dan algo a cambio: mientras hay una activa, Inicio deja de mostrar el aviso fijo que invita a compartir la app («¿Quieres colaborar con esta app y no puedes hacerlo económicamente? Compártela…»), que si no sale los dos primeros días de uso de cada semana y no se puede cerrar. La pantalla de apoyo lo dice. Muestra también el precio y el periodo de cada suscripción, las condiciones de la renovación automática, «Restaurar compras», «Gestionar o cancelar la suscripción» y los enlaces a la política de privacidad y a la EULA estándar de Apple. Se adjuntan una captura de Inicio con el aviso y otra de la pantalla de apoyo.</textarea><button type="button" class="copiar" data-para="nota-revision-es">Copiar</button></div>
+        </div>
+
+        <h2 id="antes">Antes de subir la app</h2>
+        <div class="aviso">
+          <ul>
+            <li>Mi Biblia es una <strong>app nueva</strong> en las dos tiendas, con su propio proyecto de Expo y sus propias claves: no comparte nada con la app «Biblia de Jerusalén» (<code>docs/PUBLICAR.md</code> en la app).</li>
+            <li><strong>Google Play pide un .aab firmado</strong> con la clave de subida que crea EAS en el primer build de <code>production</code>. La primera versión se sube a mano en Play Console (Prueba interna); después ya vale <code>eas submit</code>.</li>
+            <li>Las cuentas personales de Google Play creadas desde noviembre de 2023 deben hacer antes una <strong>prueba cerrada con 12 personas durante 14 días</strong>.</li>
+            <li>Para iOS hace falta la cuenta de Apple Developer y compilar con EAS Build (en la nube) o con un Mac.</li>
+            <li><strong>Cuando haya fichas:</strong> cambia los botones «Muy pronto» de la portada de esta web y pon el enlace de la App Store en <code>STORE_URLS.ios</code> de <code>services/shareApp.ts</code> en la app (el README de esta web lo explica).</li>
+            <li><strong>Esta web no caduca:</strong> la dirección es de GitHub y no depende de ningún dominio. Solo no borres el repositorio.</li>
+          </ul>
+        </div>
+      </div>
+    </main>
+    <div id="copiado" role="status" aria-live="polite"></div>
+    <footer class="pie marino"><div class="contenedor"><p>Mi Biblia · Una app de López Otero</p></div></footer>
+    <script>
+      const aviso = document.getElementById('copiado');
+      let t;
+      document.querySelectorAll('.copiar').forEach((b) => {
+        const campo = document.getElementById(b.dataset.para);
+        const etiqueta = document.querySelector('label[for="' + b.dataset.para + '"]').textContent;
+        b.setAttribute('aria-label', 'Copiar: ' + etiqueta);
+        b.addEventListener('click', async () => {
+          try {
+            await navigator.clipboard.writeText(campo.value);
+          } catch (e) {
+            campo.select();
+            document.execCommand('copy');
+          }
+          aviso.textContent = 'Copiado: ' + etiqueta;
+          aviso.classList.add('visible');
+          clearTimeout(t);
+          t = setTimeout(() => aviso.classList.remove('visible'), 1800);
+        });
+      });
+    </script>
+  </body>
+</html>
